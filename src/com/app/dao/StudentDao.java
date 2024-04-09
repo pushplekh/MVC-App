@@ -8,8 +8,8 @@ public interface StudentDao {
 
 	public Student search(String sid);
 
-	public Student update(String student);
+	public String update(Student student);
 
-	public Student delete(String student);
+	public String delete(String student);
 
 }

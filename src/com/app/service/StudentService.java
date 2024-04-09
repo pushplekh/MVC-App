@@ -8,10 +8,10 @@ public interface StudentService {
 
 	public Student search(String sid);
 
-	public String getStudent(Student sid);
+	public Student getStudent(String sid);
 
 	public String updateStudent(Student student);
 
-	public String deleteStudent(Student sid);
+	public String deleteStudent(String sid);
 
 }

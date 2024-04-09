@@ -28,21 +28,23 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public String getStudent(Student sid) {
-		// TODO Auto-generated method stub
-		return null;
+	public Student getStudent(String sid) {
+
+		Student student = studentDao.search(sid);
+
+		return student;
 	}
 
 	@Override
 	public String updateStudent(Student student) {
-		// TODO Auto-generated method stub
-		return null;
+		String status = studentDao.update(student);
+		return status;
 	}
 
 	@Override
-	public String deleteStudent(Student sid) {
-		// TODO Auto-generated method stub
-		return null;
+	public String deleteStudent(String sid) {
+		String status = studentDao.delete(sid);
+		return status;
 	}
 
 }

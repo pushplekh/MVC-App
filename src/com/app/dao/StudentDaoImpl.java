@@ -65,10 +65,9 @@ public class StudentDaoImpl implements StudentDao {
 				student.setSid(rs.getString("SID"));
 				student.setSname(rs.getString("SNAME"));
 				student.setSaddr(rs.getString("SADDR"));
-			}else {
+			} else {
 				student = null;
 			}
-			
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -78,15 +77,55 @@ public class StudentDaoImpl implements StudentDao {
 	}
 
 	@Override
-	public Student update(String student) {
-		// TODO Auto-generated method stub
-		return null;
+	public String update(Student student) {
+		String status = "";
+		Connection con;
+		try {
+			con = dataSource.getConnection();
+			PreparedStatement ps = con.prepareStatement("update Student set SNAME = ?, SADDR = ? where SID=?");
+			ps.setString(1, student.getSname());
+			ps.setString(2, student.getSaddr());
+			ps.setString(3, student.getSid());
+
+			int rowCount = ps.executeUpdate();
+			if (rowCount == 1)
+				;
+			status = "success";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return status;
 	}
 
 	@Override
-	public Student delete(String student) {
-		// TODO Auto-generated method stub
-		return null;
+	public String delete(String sid) {
+		String status = "";
+		try {
+			Connection con = dataSource.getConnection();
+			PreparedStatement pst = con.prepareStatement("select * from student where SID = ?");
+			pst.setString(1, sid);
+			ResultSet rs = pst.executeQuery();
+
+			boolean b = rs.next();
+
+			if (b) {
+				pst = con.prepareStatement("delete from student where sid = ?");
+				pst.setString(1, sid);
+				int rowCount = pst.executeUpdate();
+				if (rowCount == 1) {
+					status = "success";
+				} else {
+					status = "failure";
+				}
+			} else {
+				status = "notExisted";
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return status;
 	}
 
 }

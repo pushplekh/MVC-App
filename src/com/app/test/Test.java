@@ -40,10 +40,10 @@ public class Test {
 				studentController.search();
 				break;
 			case 3:
-
+				studentController.updateStudent();
 				break;
 			case 4:
-
+				studentController.deleteStudent();
 				break;
 			case 5:
 				System.out.println("Thanks for using the application");

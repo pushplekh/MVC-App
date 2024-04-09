@@ -89,13 +89,56 @@ public class StudentControllerImpl implements StudentController {
 
 	@Override
 	public void updateStudent() {
-		// TODO Auto-generated method stub
+		try {
+			System.out.println("Student ID : ");
+			String sid = br.readLine();
+			Student student = studentService.getStudent(sid);
+			if(student==null) {
+				System.out.println("Student not existed");
+			}else {
+				System.out.println("Student ID : " + student.getSid());
+				System.out.print("Student Name : Old Value: '" + student.getSname() + "' new Value : ");
+				String sname = br.readLine();
+				System.out.print("Student Address : Old Value: '" + student.getSaddr() + "' new Value : ");
+				String saddr = br.readLine();
+				
+				student.setSname(sname);
+				student.setSaddr(saddr);
+				String status = studentService.updateStudent(student);
+				if(status.equals("success")) {
+					System.out.println("Student Updation Success");
+				}else {
+					System.out.println("Student Updation Failure");
+				}
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
 	@Override
 	public void deleteStudent() {
-		// TODO Auto-generated method stub
+		try {
+			System.out.println("Enter Student ID for which you want to delte the entery of student");
+			String sid = br.readLine();
+			
+			String status  = studentService.deleteStudent(sid);
+			if(status.equals("success")) {
+				System.out.println("Deletion of Student Success");
+			}
+			if(status.equals("failure")) {
+				System.out.println("Student Deletion failure");
+			}
+			if(status.equals("notExisted")) {
+				System.out.println("Student Not Existed");
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
