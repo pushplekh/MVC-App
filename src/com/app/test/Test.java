@@ -6,15 +6,14 @@ import java.io.InputStreamReader;
 import java.util.Scanner;
 
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.app.controller.StudentController;
 
 public class Test {
 
 	public static void main(String[] args) throws NumberFormatException, IOException {
-		ApplicationContext context = new ClassPathXmlApplicationContext(
-				"com/app/resources/applicationContext.xml");
+		ApplicationContext context = new AnnotationConfigApplicationContext(com.app.config.AppConfig.class);
 
 		StudentController studentController = (StudentController) context.getBean("studentController");
 
